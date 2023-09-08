@@ -25,3 +25,15 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.bg {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 200px;
+  width: 200px;
+  background: linear-gradient(90deg, #335fb4 0%, #2ae9c9 100%);
+  filter: blur(20px);
+  z-index: -1;
+}
