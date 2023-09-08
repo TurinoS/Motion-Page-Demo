@@ -1,8 +1,11 @@
 'use client'
 
+import Image from 'next/image';
+import img from '../../public/next.svg'
 import { useEffect, useRef } from 'react';
 import { AiFillStar } from 'react-icons/ai'
 import { Typewriter, Cursor } from 'react-simple-typewriter';
+import Tilt from "react-parallax-tilt";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 AOS.init();
@@ -25,11 +28,23 @@ export default function Home() {
 
   return (
     <main className="flex flex-col p-24 text-6xl text-orange-500">
-      <section className="flex min-h-screen">
-        <AiFillStar />
+      <section className="">
+        <div className='flex mb-12'>
+          <AiFillStar />
         <h1 className='flex gp-2'><Typewriter words={['Hello, World!']} loop={3} cursor={true} cursorStyle=''/></h1>
         <Cursor />
         <AiFillStar />
+        </div>
+        <div className='w-1/5 bg-gray-500'>
+        <Tilt
+            tiltReverse={true}
+            scale={1.05}
+          >
+            <article className='hover:shadow-2xl'>
+              <Image src={img} alt='next image' width={300} />
+            </article>
+          </Tilt>
+            </div>
       </section>
       
       <section
