@@ -5,8 +5,11 @@ import img1 from "../../public/foto-perfil.png";
 import img2 from "../../public/foto-perfil-2.png";
 import img3 from "../../public/foto-perfil-3.png";
 import cursor from "../../public/pointer.png";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useTheme } from 'next-themes';
 import { AiFillStar } from "react-icons/ai";
+import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
+import Switch from 'react-switch';
 import { Typewriter, Cursor } from "react-simple-typewriter";
 import Tilt from "react-parallax-tilt";
 import "swiper/css";
@@ -24,28 +27,30 @@ AOS.init();
 register();
 
 export default function Home() {
-  const root = useRef<HTMLElement>(null);
+  const {theme, setTheme} = useTheme();
   const imgRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
     const bodyBound = bodyRef.current?.getBoundingClientRect();
-    const x = clientX - bodyBound.x - 3;
-    const y = clientY - bodyBound.y - 3;
+    const x = clientX - (bodyBound?.x || 0) - 3;
+    const y = clientY - (bodyBound?.y || 0) - 3;
 
-    imgRef.current.style.top = y + "px";
-    imgRef.current.style.left = x + "px";
+    imgRef.current!.style.top = y + "px";
+    imgRef.current!.style.left = x + "px";
     drawTrail(x, y);
   };
 
-  const drawTrail = (x, y) => {
+  const drawTrail = (x: number, y: number) => {
+    if (bodyRef.current) {
     const div = document.createElement('div');
     div.classList.add('triangle')
     div.style.top = y + "px";
     div.style.left = x + "px";
 
     bodyRef.current?.append(div);
+
     if(bodyRef.current?.childNodes.length > 25) {
     eraseTrail();
     } else {
@@ -53,7 +58,7 @@ export default function Home() {
         eraseTrail();
       }, 1500)
     }
-  }
+  }}
 
   const eraseTrail = () => {
     bodyRef.current?.removeChild(bodyRef.current.childNodes[2])
@@ -62,11 +67,19 @@ export default function Home() {
   return (
     <main onMouseMove={(e) => {
       handleMouseMove(e);
-    }} className="flex flex-col p-16 text-6xl">
+    }} className="flex flex-col p-16 pt-0 text-6xl">
+        <Switch 
+          className="m-10 self-end"
+          onChange={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          checked={theme === 'dark' ? true : false}
+          checkedIcon={<BsFillSunFill className="pt-1 ml-1 text-3xl" />}
+          uncheckedIcon={<BsFillMoonStarsFill className="pt-1 ml-1 text-3xl" />}
+          height={35}
+          width={70}
+        />
       <div
-        
         ref={bodyRef}
-        className="w-full h-[500px] bg-yellow-500 border-2 border-black p-6 relative overflow-hidden"
+        className="w-full h-[500px] bg-yellow-500 border-2 border-black p-6 relative overflow-hidden cursor-none"
       >
         <div className="flex justify-center mb-12 text-blue-700">
           <AiFillStar />

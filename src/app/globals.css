@@ -1,37 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply bg-stone-100 text-stone-900 dark:bg-slate-900 dark:text-stone-100;
 }
 
 .triangle {
   height: 0;
   width: 0;
-  border-left: 18px solid transparent; /* Lado esquerdo transparente */
-  border-right: 18px solid transparent; /* Lado direito transparente */
-  border-bottom: 34px solid black; /* Borda inferior preta */
+  border-left: 18px solid transparent; 
+  border-right: 18px solid transparent; 
+  border-bottom: 34px solid black;
   transform: rotate(326deg);
   z-index: 2;
   position: absolute;
@@ -40,11 +20,11 @@ body {
 .triangle::after {
   content: '';
   position: absolute;
-  top: 4px; /* Ajuste a posição da borda preta */
-  left: -15px; /* Ajuste a posição da borda preta */
+  top: 4px; 
+  left: -15px; 
   width: 0;
   height: 0;
-  border-left: 15px solid transparent; /* Lado esquerdo transparente */
-  border-right: 15px solid transparent; /* Lado direito transparente */
-  border-bottom: 28px solid white; /* Lado inferior com a cor de fundo desejada */
+  border-left: 15px solid transparent; 
+  border-right: 15px solid transparent; 
+  border-bottom: 28px solid white;
 }
