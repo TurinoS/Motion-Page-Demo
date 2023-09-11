@@ -6,6 +6,10 @@ body {
   @apply bg-stone-100 text-stone-900 dark:bg-slate-900 dark:text-stone-100;
 }
 
+header {
+  @apply bg-orange-500 text-purple-900 dark:bg-purple-900 dark:text-orange-500;
+}
+
 .triangle {
   height: 0;
   width: 0;

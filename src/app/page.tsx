@@ -68,20 +68,24 @@ export default function Home() {
     <main onMouseMove={(e) => {
       handleMouseMove(e);
     }} className="flex flex-col p-16 pt-0 text-6xl">
-        <Switch 
-          className="m-10 self-end"
+      <header className="flex justify-between items-center p-4 rounded my-4">
+        <h1>TurinoS text project</h1>
+        <Switch
           onChange={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           checked={theme === 'dark' ? true : false}
           checkedIcon={<BsFillSunFill className="pt-1 ml-1 text-3xl" />}
-          uncheckedIcon={<BsFillMoonStarsFill className="pt-1 ml-1 text-3xl" />}
+          uncheckedIcon={<BsFillMoonStarsFill className="pt-1 ml-1 text-3xl text-purple-500" />}
           height={35}
           width={70}
+          onColor="#550000"
+          offColor="#390055"
         />
+      </header>
       <div
         ref={bodyRef}
         className="w-full h-[500px] bg-yellow-500 border-2 border-black p-6 relative overflow-hidden cursor-none"
       >
-        <div className="flex justify-center mb-12 text-blue-700">
+        <div className="flex justify-center pt-10 mb-12 text-blue-700">
           <AiFillStar />
           <h1 className="z-20">
             <Typewriter
