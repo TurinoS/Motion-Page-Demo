@@ -5,7 +5,7 @@ import img1 from "../../public/foto-perfil.png";
 import img2 from "../../public/foto-perfil-2.png";
 import img3 from "../../public/foto-perfil-3.png";
 import cursor from "../../public/pointer.png";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTheme } from 'next-themes';
 import { AiFillStar } from "react-icons/ai";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
@@ -23,19 +23,23 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { register } from "swiper/element";
 import AOS from "aos";
 import "aos/dist/aos.css";
-AOS.init();
 register();
 
 export default function Home() {
   const {theme, setTheme} = useTheme();
   const imgRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
-    const bodyBound = bodyRef.current?.getBoundingClientRect();
-    const x = clientX - (bodyBound?.x || 0) - 3;
-    const y = clientY - (bodyBound?.y || 0) - 3;
+    const sectionBound = sectionRef.current?.getBoundingClientRect();
+    const x = clientX - (sectionBound?.x || 0) - 3;
+    const y = clientY - (sectionBound?.y || 0) - 3;
 
     imgRef.current!.style.top = y + "px";
     imgRef.current!.style.left = x + "px";
@@ -43,15 +47,15 @@ export default function Home() {
   };
 
   const drawTrail = (x: number, y: number) => {
-    if (bodyRef.current) {
+    if (sectionRef.current) {
     const div = document.createElement('div');
     div.classList.add('triangle')
     div.style.top = y + "px";
     div.style.left = x + "px";
 
-    bodyRef.current?.append(div);
+    sectionRef.current?.append(div);
 
-    if(bodyRef.current?.childNodes.length > 25) {
+    if(sectionRef.current?.childNodes.length > 25) {
     eraseTrail();
     } else {
       setTimeout(() => {
@@ -61,7 +65,7 @@ export default function Home() {
   }}
 
   const eraseTrail = () => {
-    bodyRef.current?.removeChild(bodyRef.current.childNodes[2])
+    sectionRef.current?.removeChild(sectionRef.current.childNodes[2])
   }
 
   return (
@@ -82,10 +86,10 @@ export default function Home() {
         />
       </header>
       <div
-        ref={bodyRef}
-        className="w-full h-[500px] bg-yellow-500 border-2 border-black p-6 relative overflow-hidden cursor-none"
+        ref={sectionRef}
+        className="w-full h-[400px] bg-yellow-500 dark:bg-purple-900 border-2 border-black p-6 relative overflow-hidden cursor-none"
       >
-        <div className="flex justify-center pt-10 mb-12 text-blue-700">
+        <div className="flex justify-center pt-10 mb-12 text-blue-700 dark:text-orange-500">
           <AiFillStar />
           <h1 className="z-20">
             <Typewriter
@@ -103,7 +107,7 @@ export default function Home() {
         </div>
       </div>
       <section className="flex gap-10 mt-10">
-        <div className="w-1/4">
+        <div className="w-[300px]">
           <Tilt tiltReverse={true} scale={1.05}>
             <div className="w-full group overflow-hidden rounded-xl">
               <Swiper
@@ -153,7 +157,7 @@ export default function Home() {
           </Tilt>
         </div>
 
-        <div className="bg-gray-500 py-6 px-16 text-black">
+        <div className="bg-gray-500 dark:bg-gray-300 py-6 px-16 text-black">
           <section
             className="flex flex-col items-center justify-center"
             data-aos="fade-down"
