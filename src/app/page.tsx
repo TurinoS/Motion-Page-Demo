@@ -6,10 +6,10 @@ import img2 from "../../public/foto-perfil-2.png";
 import img3 from "../../public/foto-perfil-3.png";
 import cursor from "../../public/pointer.png";
 import { useEffect, useRef } from "react";
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 import { AiFillStar } from "react-icons/ai";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
-import Switch from 'react-switch';
+import Switch from "react-switch";
 import { Typewriter, Cursor } from "react-simple-typewriter";
 import Tilt from "react-parallax-tilt";
 import "swiper/css";
@@ -26,7 +26,7 @@ import "aos/dist/aos.css";
 register();
 
 export default function Home() {
-  const {theme, setTheme} = useTheme();
+  const { theme, setTheme } = useTheme();
   const imgRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -48,37 +48,43 @@ export default function Home() {
 
   const drawTrail = (x: number, y: number) => {
     if (sectionRef.current) {
-    const div = document.createElement('div');
-    div.classList.add('triangle')
-    div.style.top = y + "px";
-    div.style.left = x + "px";
+      const div = document.createElement("div");
+      div.classList.add("triangle");
+      div.style.top = y + "px";
+      div.style.left = x + "px";
 
-    sectionRef.current?.append(div);
+      sectionRef.current?.append(div);
 
-    if(sectionRef.current?.childNodes.length > 25) {
-    eraseTrail();
-    } else {
-      setTimeout(() => {
+      if (sectionRef.current?.childNodes.length > 25) {
         eraseTrail();
-      }, 1500)
+      } else {
+        setTimeout(() => {
+          eraseTrail();
+        }, 1500);
+      }
     }
-  }}
+  };
 
   const eraseTrail = () => {
-    sectionRef.current?.removeChild(sectionRef.current.childNodes[2])
-  }
+    sectionRef.current?.removeChild(sectionRef.current.childNodes[2]);
+  };
 
   return (
-    <main onMouseMove={(e) => {
-      handleMouseMove(e);
-    }} className="flex flex-col p-16 pt-0 text-6xl">
+    <main
+      onMouseMove={(e) => {
+        handleMouseMove(e);
+      }}
+      className="flex flex-col p-16 pt-0 text-6xl"
+    >
       <header className="flex justify-between items-center p-4 rounded my-4">
         <h1>TurinoS text project</h1>
         <Switch
-          onChange={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          checked={theme === 'dark' ? true : false}
+          onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+          checked={theme === "dark" ? true : false}
           checkedIcon={<BsFillSunFill className="pt-1 ml-1 text-3xl" />}
-          uncheckedIcon={<BsFillMoonStarsFill className="pt-1 ml-1 text-3xl text-purple-500" />}
+          uncheckedIcon={
+            <BsFillMoonStarsFill className="pt-1 ml-1 text-3xl text-purple-500" />
+          }
           height={35}
           width={70}
           onColor="#550000"
@@ -171,16 +177,21 @@ export default function Home() {
             data-aos-duration="1000"
           >
             <h2 className="text-lg mt-10">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industrys standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+              volutpat justo enim, in sollicitudin nisl dapibus hendrerit. In
+              vitae orci ultrices, finibus lectus vitae, mollis diam. Cras vitae
+              sapien viverra, vulputate ante vel, dignissim ex. Suspendisse
+              aliquet tempor dolor id auctor. Donec velit ipsum, mollis quis leo
+              eu, sodales sagittis quam. Curabitur a tortor at nibh porta
+              aliquam. Cras scelerisque massa scelerisque odio vestibulum
+              posuere. Donec ultrices varius urna in lacinia. Duis ac quam at
+              lectus elementum egestas ac a nulla. Vivamus rhoncus, nunc ac
+              auctor fringilla, libero ex varius odio, eget dapibus quam dui at
+              risus. Ut elementum enim quis ipsum elementum ultricies. Ut
+              interdum turpis ac dolor hendrerit, sit amet bibendum arcu mattis.
+              Etiam dui lectus, tincidunt ac enim vitae, feugiat facilisis
+              tellus. Aenean lacus ipsum, eleifend ac interdum in, viverra nec
+              neque. Morbi est mi, fermentum et sodales eu, volutpat ut arcu.
             </h2>
           </section>
         </div>
